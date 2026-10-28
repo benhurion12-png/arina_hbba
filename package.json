@@ -1,0 +1,26 @@
+{
+  "name": "hbba-platform",
+  "version": "2.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,green \"npm run dev -w @hbba/api\" \"npm run dev -w @hbba/web\"",
+    "build": "npm run build -w @hbba/api && npm run build -w @hbba/web",
+    "typecheck": "npm run typecheck -w @hbba/api && npm run typecheck -w @hbba/web",
+    "test": "npm run test -w @hbba/api",
+    "db:generate": "npm run db:generate -w @hbba/api",
+    "db:migrate": "npm run db:migrate -w @hbba/api",
+    "db:seed": "npm run db:seed -w @hbba/api",
+    "docker:up": "docker compose up --build -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f web api postgres"
+  },
+  "devDependencies": {
+    "concurrently": "9.2.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
